@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Akins Nig Limited | Ibadan's Premier Real Estate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --navy: #0a192f;
+            --pink: #800080;
+            --light-pink: #f8e6f0;
+            --white: #ffffff;
+            --text-dark: #1f2937;
+            --accent: #800080;
+            --dark-pink: #be185d;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Georgia', 'Garamond', serif; }
+        body { background-color: var(--white); color: var(--text-dark); overflow-x: hidden; line-height: 1.6; }
+
+        /* WHATSAPP BUTTON */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            transition: 0.3s;
+            z-index: 99;
+            text-decoration: none;
+        }
+        .whatsapp-btn:hover { transform: scale(1.1); box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6); }
+
+        /* NAVBAR */
+        nav {
+            background: var(--white);
+            padding: 20px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(217, 70, 166, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--light-pink);
+        }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--navy); letter-spacing: 1px; }
+        .logo span { color: var(--pink); font-weight: 800; }
+        nav ul { display: flex; list-style: none; gap: 40px; }
+        nav a { text-decoration: none; color: var(--text-dark); font-weight: 500; transition: 0.3s; }
+        nav a:hover { color: var(--pink); }
+
+        /* 1. HERO & SEARCH SECTION */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(135deg, rgba(10, 25, 47, 0.7), rgba(217, 70, 166, 0.5)), 
+                        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(217, 70, 166, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content { position: relative; z-index: 2; }
+        .hero h1 { font-size: 4rem; color: var(--white); margin-bottom: 20px; font-weight: 700; letter-spacing: 1px; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+        .hero h1 span { color: var(--light-pink); font-style: italic; }
+        .hero p { color: #f0f0f0; font-size: 1.15rem; margin-bottom: 40px; font-weight: 300; text-shadow: 1px 1px 4px rgba(0,0,0,0.2); }
+
+        .search-box {
+            background: var(--white);
+            padding: 5px;
+            border-radius: 12px;
+            display: flex;
+            width: 90%;
+            max-width: 1000px;
+            box-shadow: 0 20px 50px rgba(217, 70, 166, 0.25);
+            border: 2px solid var(--pink);
+        }
+
+        .search-box input { flex: 2; border: none; padding: 18px 25px; outline: none; font-size: 1rem; background: transparent; }
+        .search-box select { flex: 1; border: none; border-left: 2px solid #eee; padding: 0 20px; outline: none; background: transparent; font-weight: 500; }
+        .search-btn { background: var(--pink); color: white; border: none; padding: 18px 40px; cursor: pointer; font-weight: bold; border-radius: 8px; transition: 0.3s; }
+        .search-btn:hover { background: var(--dark-pink); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(217, 70, 166, 0.4); }
+
+        /* 2. CATEGORY CARDS */
+        .section-padding { padding: 100px 10%; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-tag { color: var(--pink); font-weight: bold; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 3px; }
+        .section-title { font-size: 2.8rem; margin-top: 15px; color: var(--navy); font-weight: 700; }
+
+        .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; }
+        .cat-card { 
+            background: var(--light-pink); 
+            padding: 40px 30px; 
+            border-radius: 15px; 
+            transition: 0.4s;
+            cursor: pointer;
+            border-left: 5px solid var(--pink);
+            position: relative;
+            box-shadow: 0 5px 20px rgba(217, 70, 166, 0.1);
+        }
+        .cat-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 15px 40px rgba(217, 70, 166, 0.25);
+            background: var(--white);
+            border-left-color: var(--dark-pink);
+        }
+        .cat-card i { font-size: 2.5rem; color: var(--pink); margin-bottom: 20px; }
+        .cat-card h3 { font-size: 1.3rem; color: var(--navy); font-weight: 600; }
+
+        /* 3. FEATURED PROPERTIES */
+        .featured-bg { background: linear-gradient(to bottom, #fdf6fc, var(--white)); }
+        .property-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 35px; margin-top: 50px; }
+        .prop-card { 
+            border-radius: 15px; 
+            overflow: hidden; 
+            background: white; 
+            box-shadow: 0 8px 30px rgba(217, 70, 166, 0.12); 
+            text-align: left;
+            transition: 0.4s;
+            border: 1px solid #f0e6f5;
+        }
+        .prop-card:hover { transform: translateY(-10px); box-shadow: 0 15px 45px rgba(217, 70, 166, 0.2); }
+        .prop-img { height: 240px; background-size: cover; background-position: center; position: relative; }
+        .prop-badge { position: absolute; top: 15px; left: 15px; background: var(--pink); color: white; padding: 8px 15px; border-radius: 8px; font-size: 0.75rem; font-weight: bold; }
+        .prop-content { padding: 25px; }
+        .prop-price { font-size: 1.5rem; font-weight: 800; color: var(--pink); margin-bottom: 10px; }
+        .prop-card h4 { font-size: 1.1rem; color: var(--navy); margin-bottom: 8px; font-weight: 600; }
+        .prop-location { font-size: 0.9rem; color: #888; margin-bottom: 15px; }
+        .prop-features { display: flex; justify-content: space-around; margin-top: 15px; padding-top: 15px; border-top: 1px solid #f8e6f0; }
+        .feature { text-align: center; color: #666; font-size: 0.85rem; }
+        .feature i { color: var(--pink); margin-right: 5px; }
+
+        /* 4. "NOW SELLING" BANNER */
+        .selling-banner {
+            background: linear-gradient(135deg, var(--navy) 0%, #1a3a52 100%);
+            border-radius: 20px;
+            margin: 80px 0;
+            padding: 60px 40px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(217, 70, 166, 0.2);
+            border: 2px solid var(--pink);
+        }
+
+        .selling-banner::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 400px;
+            height: 100%;
+            background: radial-gradient(circle at 100% 50%, rgba(217, 70, 166, 0.2) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .banner-text { flex: 1; position: relative; z-index: 2; }
+        .banner-text h2 { font-size: 3.2rem; color: var(--light-pink); margin-bottom: 15px; font-weight: 700; }
+        .banner-text p { font-size: 1.1rem; color: #e0e0e0; }
+        .banner-stats { flex: 1; text-align: center; position: relative; z-index: 2; }
+        .banner-stats h3 { font-size: 3rem; color: var(--light-pink); font-weight: 700; }
+        .banner-stats p { font-size: 1rem; color: #d0d0d0; margin-top: 10px; }
+
+        /* 5. VIDEO SECTION */
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 50px; }
+        .video-thumb { 
+            height: 220px; 
+            background: linear-gradient(135deg, #d946a6 0%, #ec4899 100%);
+            border-radius: 15px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            position: relative; 
+            cursor: pointer;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(217, 70, 166, 0.25);
+            transition: 0.3s;
+        }
+        .video-thumb:hover { transform: scale(1.05); }
+        .video-thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .play-overlay { position: absolute; width: 60px; height: 60px; background: rgba(255, 255, 255, 0.95); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .play-btn { font-size: 1.5rem; color: var(--pink); }
+
+        /* FEATURES SECTION */
+        .features-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        .feature-box {
+            text-align: center;
+            padding: 30px;
+            background: var(--light-pink);
+            border-radius: 15px;
+            transition: 0.3s;
+            border: 2px solid transparent;
+        }
+        .feature-box:hover { background: var(--white); box-shadow: 0 10px 30px rgba(217, 70, 166, 0.15); border-color: var(--pink); }
+        .feature-box i { font-size: 2.5rem; color: var(--pink); margin-bottom: 15px; }
+        .feature-box h4 { color: var(--navy); font-weight: 600; margin-bottom: 10px; }
+
+        /* --- NEW SECTIONS STYLING --- */
+
+        /* 6. CALL TO ACTION SECTION */
+        .cta-section {
+            background: var(--navy);
+            padding: 100px 10%;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        .cta-content h2 { font-size: 3rem; margin-bottom: 20px; color: var(--light-pink); }
+        .cta-content p { font-size: 1.2rem; max-width: 800px; margin: 0 auto 40px; color: #e0e0e0; }
+        .cta-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .btn { padding: 15px 35px; border-radius: 8px; font-weight: bold; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
+        .btn-whatsapp { background: #25d366; color: white; }
+        .btn-call { border: 2px solid var(--white); color: white; }
+        .btn:hover { transform: translateY(-3px); opacity: 0.9; }
+        .cta-features { display: flex; justify-content: center; gap: 40px; margin-top: 50px; color: #ccc; font-size: 0.9rem; }
+
+        /* 7. BLOG / INSIGHTS SECTION */
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+        .blog-card { border-radius: 15px; overflow: hidden; background: white; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: 0.3s; }
+        .blog-img { height: 200px; position: relative; }
+        .blog-tag { position: absolute; top: 15px; left: 15px; background: orange; color: white; padding: 5px 12px; border-radius: 5px; font-size: 0.7rem; font-weight: bold; }
+        .blog-content { padding: 25px; }
+        .blog-content h4 { margin-bottom: 10px; color: var(--navy); line-height: 1.4; }
+        .blog-content p { font-size: 0.9rem; color: #666; margin-bottom: 20px; }
+        .blog-meta { display: flex; justify-content: space-between; font-size: 0.8rem; color: #999; border-top: 1px solid #eee; padding-top: 15px; }
+
+        /* 8. FAQ SECTION */
+        .faq-container { max-width: 900px; margin: 0 auto; }
+        .faq-item { background: white; border: 1px solid #eee; margin-bottom: 15px; border-radius: 10px; overflow: hidden; }
+        .faq-question { padding: 20px 25px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: bold; color: var(--navy); }
+        .faq-answer { padding: 0 25px; max-height: 0; overflow: hidden; transition: 0.4s ease; background: #fafafa; }
+        .faq-item.active .faq-answer { padding: 20px 25px; max-height: 200px; }
+
+        /* 9. NEWSLETTER SECTION */
+        .newsletter-section { padding: 80px 10%; text-align: center; background: #f9f9f9; }
+        .newsletter-box { max-width: 700px; margin: 0 auto; }
+        .newsletter-box i { font-size: 3rem; color: var(--navy); margin-bottom: 20px; }
+        .newsletter-box h2 { font-size: 2.5rem; margin-bottom: 15px; color: var(--navy); }
+        .newsletter-form { display: flex; margin-top: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border-radius: 10px; overflow: hidden; }
+        .newsletter-form input { flex: 1; padding: 18px 25px; border: none; outline: none; }
+        .newsletter-form button { background: var(--navy); color: white; border: none; padding: 0 35px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .newsletter-form button:hover { background: var(--pink); }
+
+        /* FOOTER */
+        footer { 
+            background: var(--navy); 
+            color: white; 
+            padding: 60px 10%; 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+            gap: 50px; 
+            text-align: left;
+            border-top: 3px solid var(--pink);
+        }
+        footer h3, footer h4 { color: var(--light-pink); margin-bottom: 15px; }
+        footer p { color: #c0c0c0; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <a href="https://wa.me/234XXXXXXXXXX" class="whatsapp-btn" title="Chat with us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <nav>
+        <div class="logo">Royal Akins <span>Nig Ltd</span></div>
+        <ul>
+            <li><a href="#properties">Properties</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Find Your Perfect <br><span>Property in Ibadan</span></h1>
+            <p>Verified lands and luxury apartments curated by Royal Akins Nig Limited.</p>
+        </div>
+        <div class="search-box">
+            <input type="text" placeholder="Search by location (e.g. Itura Gardens)">
+            <select><option>For Sale</option><option>For Rent</option></select>
+            <button class="search-btn">Find Property</button>
+        </div>
+    </header>
+
+    <section class="section-padding">
+        <div class="section-header">
+            <p class="section-tag">Explore Categories</p>
+            <h2 class="section-title">What Are You Looking For?</h2>
+        </div>
+        <div class="category-grid">
+            <div class="cat-card"><i class="fas fa-mountain"></i><h3>Land</h3></div>
+            <div class="cat-card"><i class="fas fa-home"></i><h3>Houses</h3></div>
+            <div class="cat-card"><i class="fas fa-building"></i><h3>Apartments</h3></div>
+            <div class="cat-card"><i class="fas fa-briefcase"></i><h3>Commercial</h3></div>
+        </div>
+    </section>
+
+    <section class="section-padding featured-bg" id="properties">
+        <div class="section-header">
+            <p class="section-tag">Featured Properties</p>
+            <h2 class="section-title">Royal Akins Top Listings</h2>
+        </div>
+        <div class="property-grid">
+            <div class="prop-card">
+                <div class="prop-img" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=500&q=60')">
+                    <div class="prop-badge">Verified Land</div>
+                </div>
+                <div class="prop-content">
+                    <p class="prop-price">₦2,500,000</p>
+                    <h4>Premium Plot at Itura Gardens</h4>
+                    <p class="prop-location"><i class="fas fa-map-marker-alt"></i> Ibadan, Oyo State</p>
+                    <div class="prop-features">
+                        <div class="feature"><i class="fas fa-ruler-combined"></i> 500 SQM</div>
+                        <div class="feature"><i class="fas fa-check-circle"></i> Verified</div>
+                    </div>
+                </div>
+            </div>
+            <div class="prop-card">
+                <div class="prop-img" style="background-image: url('https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=500&q=60')">
+                    <div class="prop-badge">Now Selling</div>
+                </div>
+                <div class="prop-content">
+                    <p class="prop-price">₦35,000,000</p>
+                    <h4>4 Bedroom Luxury Duplex</h4>
+                    <p class="prop-location"><i class="fas fa-map-marker-alt"></i> Bodija, Ibadan</p>
+                    <div class="prop-features">
+                        <div class="feature"><i class="fas fa-door-open"></i> 4 Bed</div>
+                        <div class="feature"><i class="fas fa-bath"></i> 3 Bath</div>
+                    </div>
+                </div>
+            </div>
+            <div class="prop-card">
+                <div class="prop-img" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=500&q=60')">
+                    <div class="prop-badge">Modern Home</div>
+                </div>
+                <div class="prop-content">
+                    <p class="prop-price">₦18,500,000</p>
+                    <h4>3 Bedroom Contemporary Villa</h4>
+                    <p class="prop-location"><i class="fas fa-map-marker-alt"></i> Lekki Area, Ibadan</p>
+                    <div class="prop-features">
+                        <div class="feature"><i class="fas fa-door-open"></i> 3 Bed</div>
+                        <div class="feature"><i class="fas fa-bath"></i> 2 Bath</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Find Your Dream Property?</h2>
+            <p>Let our expert team guide you to the perfect property. Whether buying, renting, or investing, we're here to help.</p>
+            <div class="cta-btns">
+                <a href="#" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+                <a href="#" class="btn btn-call"><i class="fas fa-phone-alt"></i> Call Us Now</a>
+            </div>
+            <div class="cta-features">
+                <span><i class="fas fa-check-circle"></i> Verified Listings</span>
+                <span><i class="fas fa-check-circle"></i> Expert Guidance</span>
+                <span><i class="fas fa-check-circle"></i> Secure Transactions</span>
+            </div>
+        </div>
+    </section>
+    <section class="section-padding">
+        <div class="section-header">
+            <p class="section-tag">Visual Experience</p>
+            <h2 class="section-title">Property Video Tours</h2>
+        </div>
+        <div class="video-grid">
+            <div class="video-thumb">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=500&q=60" alt="Property Tour">
+                <div class="play-overlay"><i class="fas fa-play play-btn"></i></div>
+            </div>
+            <div class="video-thumb">
+                <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=500&q=60" alt="Property Tour">
+                <div class="play-overlay"><i class="fas fa-play play-btn"></i></div>
+            </div>
+            <div class="video-thumb">
+                <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=500&q=60" alt="Property Tour">
+                <div class="play-overlay"><i class="fas fa-play play-btn"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding featured-bg">
+        <div class="section-header">
+            <p class="section-tag">Why Choose Us</p>
+            <h2 class="section-title">Our Commitment to Excellence</h2>
+        </div>
+        <div class="features-section">
+            <div class="feature-box">
+                <i class="fas fa-check-double"></i>
+                <h4>Verified Properties</h4>
+                <p>100% authentic and legally verified listings</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-handshake"></i>
+                <h4>Expert Guidance</h4>
+                <p>Professional consultants to assist your journey</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-lock"></i>
+                <h4>Secure Transactions</h4>
+                <p>Safe and transparent buying process</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-star"></i>
+                <h4>Premium Locations</h4>
+                <p>Properties in the best neighborhoods</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="section-header">
+            <p class="section-tag">From Our Blog</p>
+            <h2 class="section-title">Real Estate Insights</h2>
+            <p>Stay informed with the latest news, tips, and guides about property in Ibadan</p>
+        </div>
+        <div class="blog-grid">
+            <div class="blog-card">
+                <div class="blog-img" style="background: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=500&q=60'); background-size: cover;">
+                    <span class="blog-tag">Market News</span>
+                </div>
+                <div class="blog-content">
+                    <h4>Update on House Agent Extortion in Oyo State</h4>
+                    <p>A briefing based on updates from the latest stakeholder meeting regarding fair housing...</p>
+                    <div class="blog-meta">
+                        <span><i class="far fa-user"></i> Royal Agent</span>
+                        <span><i class="far fa-calendar"></i> 20 Jan</span>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="blog-img" style="background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=500&q=60'); background-size: cover;">
+                    <span class="blog-tag">Investment</span>
+                </div>
+                <div class="blog-content">
+                    <h4>The Quiet Goldmine: Why Investors are Buying Land in Ido</h4>
+                    <p>Ibadan continues to expand rapidly, but there is one corridor that remains overlooked...</p>
+                    <div class="blog-meta">
+                        <span><i class="far fa-user"></i> Royal Agent</span>
+                        <span><i class="far fa-calendar"></i> 01 Jan</span>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="blog-img" style="background: url('https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=500&q=60'); background-size: cover;">
+                    <span class="blog-tag">Investment</span>
+                </div>
+                <div class="blog-content">
+                    <h4>The Rise of Destination Short-Lets in Ibadan</h4>
+                    <p>Ibadan is experiencing a remarkable shift in the hospitality sector beyond traditional hotels...</p>
+                    <div class="blog-meta">
+                        <span><i class="far fa-user"></i> Royal Agent</span>
+                        <span><i class="far fa-calendar"></i> 29 Dec</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding featured-bg">
+        <div class="section-header">
+            <p class="section-tag">Got Questions?</p>
+            <h2 class="section-title">Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">How do I find properties for rent in Ibadan? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">You can use our search tool above or contact our agents directly via WhatsApp for the latest rental listings tailored to your budget.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Are the property listings on Royal Akins verified? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Yes, 100%. We conduct thorough title searches and physical inspections on every property before listing them.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What areas in Ibadan do you cover? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">We cover all major hubs including Bodija, Akala Express, Ido, Moniya, Oluyole, and Samonda.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Do you offer property management services? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Yes, we provide full-service property management including tenant screening, maintenance, and rent collection.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter-section">
+        <div class="newsletter-box">
+            <i class="far fa-envelope"></i>
+            <h2>Stay Updated on New Listings</h2>
+            <p>Subscribe to our newsletter and be the first to know about new properties and market insights</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe <i class="fas fa-arrow-right"></i></button>
+            </form>
+            <p style="font-size: 0.8rem; margin-top: 15px; color: #888;">We respect your privacy. Unsubscribe at any time.</p>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div>
+            <h3>Royal Akins Nig Ltd</h3>
+            <p>Your trusted real estate partner in Ibadan and beyond. We deliver excellence in every transaction.</p>
+        </div>
+        <div>
+            <h4>Quick Links</h4>
+            <p>Our Services</p>
+            <p>All Listings</p>
+            <p>Property Valuation</p>
+            <p>Contact Us</p>
+        </div>
+        <div>
+            <h4>Contact Info</h4>
+            <p><i class="fas fa-map-marker-alt"></i> Ibadan, Oyo State</p>
+            <p><i class="fas fa-phone"></i> +234 XXX XXX XXXX</p>
+            <p><i class="fas fa-envelope"></i> info@royalakinnig.com</p>
+        </div>
+        <div>
+            <h4>Follow Us</h4>
+            <p><i class="fab fa-facebook"></i> Facebook</p>
+            <p><i class="fab fa-twitter"></i> Twitter</p>
+            <p><i class="fab fa-instagram"></i> Instagram</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', event => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            })
+        })
+    </script>
+
+</body>
+</html>
